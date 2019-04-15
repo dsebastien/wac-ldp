@@ -11,7 +11,7 @@ export class ContainerReader extends StorageProcessor implements Processor {
   async process (task: LdpTask) {
     const container = this.storage.getContainer(task.path)
     const membersList = await container.getMembers()
-    const resourceData = membersListAsResourceData(task.path, membersList, task.asJsonLd)
+    const resourceData = await membersListAsResourceData(task.path, membersList, task.asJsonLd)
     return {
       resultType: (task.omitBody ? ResultType.OkayWithoutBody : ResultType.OkayWithBody),
       resourceData,
